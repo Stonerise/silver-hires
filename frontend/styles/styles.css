@@ -1,0 +1,67 @@
+/* Global Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-primary {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #218838;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Forms */
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Job Cards */
+  .job-card {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+  }
+  
+  .job-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .job-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .job-title:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,154 @@
+/* Japandi Theme Colors */
+:root {
+    --japandi-bg: #f8f6f3;
+    --japandi-paper: #fff;
+    --japandi-stone: #eae7e0;
+    --japandi-dark: #594e45;
+    --japandi-text: #2c2520;
+    --japandi-accent: #5c6ac4;
+    --japandi-accent-light: #e4e7fa;
+    --japandi-success: #5a7e6a;
+    --japandi-error: #ba6c55;
+  }
+  
+  /* Base Styles */
+  body {
+    background-color: var(--japandi-bg);
+    color: var(--japandi-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  /* Card Styles */
+  .japandi-card {
+    background-color: var(--japandi-paper);
+    border: 1px solid var(--japandi-stone);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+  }
+  
+  .japandi-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Button Styles */
+  .japandi-btn {
+    background-color: var(--japandi-accent);
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .japandi-btn:hover {
+    background-color: #4a57b7;
+  }
+  
+  .japandi-btn-secondary {
+    background-color: var(--japandi-stone);
+    color: var(--japandi-dark);
+  }
+  
+  .japandi-btn-secondary:hover {
+    background-color: #ddd7cc;
+  }
+  
+  /* Form Input Styles */
+  .japandi-input, .japandi-select {
+    background-color: var(--japandi-paper);
+    border: 1px solid var(--japandi-stone);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 18px;
+    width: 100%;
+    transition: all 0.2s ease;
+  }
+  
+  .japandi-input:focus, .japandi-select:focus {
+    border-color: var(--japandi-accent);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--japandi-accent-light);
+  }
+  
+  /* Heading Styles */
+  .japandi-heading {
+    font-weight: 500;
+    color: var(--japandi-dark);
+    margin-bottom: 16px;
+  }
+  
+  /* Table Styles */
+  .japandi-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 24px;
+  }
+  
+  .japandi-table th {
+    text-align: left;
+    padding: 14px 16px;
+    background-color: var(--japandi-stone);
+    color: var(--japandi-dark);
+    font-weight: 500;
+    font-size: 18px;
+  }
+  
+  .japandi-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--japandi-stone);
+    font-size: 18px;
+  }
+  
+  .japandi-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Header Styles */
+  .japandi-header {
+    background-color: var(--japandi-dark);
+    color: white;
+    padding: 16px 0;
+  }
+  
+  /* Navigation Styles */
+  .japandi-nav {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    padding: 12px 0;
+  }
+  
+  .japandi-nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+  }
+  
+  .japandi-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Accessibility Helpers */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }

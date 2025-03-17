@@ -1,0 +1,117 @@
+/* Reset and Body Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Page Title */
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+/* Fix: Wider Container */
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Fix: Align Job Listings to Left */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* Fix: Job Listings Card Size */
+.col-md-4 {
+  width: 40%;
+  margin-bottom: 20px;
+}
+
+/* Job Card Appearance */
+.card {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Fix: Job Title Styling */
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.card-title:hover {
+  text-decoration: underline;
+}
+
+/* Job Card Subtitle */
+.card-subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+/* Fix: Apply Button (Remove Black Border) */
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Fix: Center Search Bar & Dropdowns in One Row */
+.filter-container {
+  display: flex;
+  justify-content: center;  /* Align everything in the center */
+  align-items: center;  
+  gap: 15px;  /* Proper spacing between elements */
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Fix: Ensure Search Bar & Dropdowns Are Same Size */
+.filter-input,
+.filter-dropdown {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 250px;  /* Set same width for all elements */
+  text-align: center;
+}
+
+/* Extra Fix: Ensure Search Bar Centers Correctly */
+.filter-input {
+  flex: 1;  /* Allow it to stretch evenly */
+  max-width: 250px;  /* Prevent it from becoming too wide */
+}
+
+
+/* Job Details Page */
+.job-details {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 15px;
+}

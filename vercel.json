@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "frontend/package.json",
+        "use": "@vercel/next"
+      },
+      {
+        "src": "backend/server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "backend/server.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "frontend"
+      }
+    ],
+    "env": {
+      "MONGO_URI": "@mongo_uri",
+      "JWT_SECRET": "@jwt_secret",
+      "PORT": "5001"
+    }
+  }
