@@ -18,9 +18,12 @@ export default function Navigation() {
     const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
     if (token) {
       // Fetch user details using fetchAPI utility
-      fetch("/api/auth/user-profile")
+      fetch("/api/auth/user-profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         if (!res.ok) {
+          console.log("User profile fetch failed:", res.status);
           // Instead of throwing an error, return a special object
           return { status: "error", message: "Authentication failed" };
         }
@@ -38,7 +41,7 @@ export default function Navigation() {
             isLoggedIn: false,
             isEmployer: false
           });
-          return; // Exit early
+          return; 
         }
           setUserData({
             name: data.name || "User",
@@ -48,6 +51,7 @@ export default function Navigation() {
         })
         .catch((error) => {
           console.error("Error fetching user profile:", error);
+          localStorage.removeItem("token");
           // Handle authentication error by resetting state
           setUserData({
             name: "",

@@ -27,9 +27,7 @@ export default function SignIn() {
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
   
@@ -46,15 +44,17 @@ export default function SignIn() {
         }
       });
       
-      if (userRes.ok) {
         const userData = await userRes.json();
+        console.log("User Profile Response:", userRes.status, userData);
         // Redirect based on user type
+      if (userRes.ok) {
         if (userData.isEmployer) {
           router.push("/employer");
         } else {
           router.push("/job-seeker");
         }
       } else {
+        console.error("User profile fetch failed:", userData);
         router.push("/"); // Default redirect to home if can't determine user type
       }
     } else {
@@ -62,6 +62,7 @@ export default function SignIn() {
     }
   } catch (error) {
     setMessage("Server error. Please try again later.");
+    console.error("Login error:", error);
   } finally {
     setIsLoading(false);
   }
