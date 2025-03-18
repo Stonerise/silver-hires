@@ -8,6 +8,18 @@
     ],
     "routes": [
       {
+        "src": "/_next/static/(.*)",
+        "dest": "frontend/_next/static/$1"
+      },
+      {
+        "src": "/_next/(.*)",
+        "dest": "frontend/_next/$1"
+      },
+      {
+        "src": "/api/(.*)",
+        "dest": "frontend/api/$1"
+      },
+      {
         "src": "/(.*)",
         "dest": "frontend"
       }
