@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -35,6 +36,9 @@ mongoose
     .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("MongoDB Atlas Connected"))
     .catch((error) => console.error("MongoDB Atlas Connection Error:", error));
+
+// Export vercel serverless
+module.exports = app;
 
 // Test route
 app.get("/", (req, res) => {

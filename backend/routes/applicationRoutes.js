@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // POST: Submit job application
-router.post("/", upload.fields([{ name: "resume" }, { name: "coverLetter" }]), async (req, res) => {
+router.post("/", authenticateToken, async (req, res) => {
     console.log("Received Form Data:", req.body); // Debugging log
   const { jobId, applicantName, applicantEmail, applicantPhone } = req.body;
 
@@ -34,8 +34,8 @@ router.post("/", upload.fields([{ name: "resume" }, { name: "coverLetter" }]), a
       applicantName,
       applicantEmail,
       applicantPhone,
-      resumeUrl: `/uploads/${req.files.resume[0].filename}`,
-      coverLetterUrl: `/uploads/${req.files.coverLetter[0].filename}`,
+      resumeUrl: "TEMP_RESUME_URL",
+      coverLetterUrl: "TEMP_COVERLETTER_URL",
       // following line to include user ID if authenticated
       ...(req.user && { userId: req.user.id })
     });
