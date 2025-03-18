@@ -6,10 +6,11 @@ const nextConfig = {
   },
   // API proxying configuration
   async rewrites() {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL 
     return [
       {
         source: '/api/:path*',
-        destination: process.env.NEXT_PUBLIC_API_URL + '/api/:path*', 
+        destination: `${apiUrl}/api/:path*`, 
       },
     ];
   },

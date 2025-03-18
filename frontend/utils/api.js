@@ -21,8 +21,7 @@ export const fetchAPI = async (endpoint, options = {}) => {
     headers.Authorization = `Bearer ${token}`;
   }
   
-  // For deployments, we can use relative URLs if API_URL is empty
-  const url = API_URL ? `${API_URL}${endpoint}` : endpoint;
+  const url = `/api${endpoint}`;
   
   const response = await fetch(url, {
     ...options,
@@ -47,8 +46,7 @@ export const uploadFile = async (endpoint, formData) => {
     headers.Authorization = `Bearer ${token}`;
   }
   
-  // For deployments, we can use relative URLs if API_URL is empty
-  const url = API_URL ? `${API_URL}${endpoint}` : endpoint;
+  const url = `/api${endpoint}`;
   
   const response = await fetch(url, {
     method: 'POST',
