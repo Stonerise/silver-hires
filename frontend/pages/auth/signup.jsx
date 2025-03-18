@@ -56,6 +56,12 @@ export default function SignUp() {
       return;
     }
 
+    // client side password validation
+    if (formData.password.length < 8 || !/\d/.test(formData.password)) {
+      setMessage("Password must be at least 8 characters and contain 1 number.");
+      return;
+    }
+
     const dataToSubmit = { ...formData };
     delete dataToSubmit.confirmPassword;
 

@@ -125,7 +125,7 @@ export default function SignIn() {
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Password (min 8 characters including 1 number)"
           style={{
             width: "100%",
             padding: "12px 16px",

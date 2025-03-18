@@ -25,7 +25,9 @@ router.post(
   [
     body("name").not().isEmpty().withMessage("Name is required"),
     body("email").isEmail().withMessage("Enter a valid email"),
-    body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+    body("password")
+      .isLength({ min: 8 }).withMessage("Password must be at least 8 characters")
+      .matches(/\d/).withMessage("Password must contain at least one number"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -50,7 +52,7 @@ router.post(
       await user.save();
 
       // Generate JWT Token
-      const payload = { user: { id: user.id } };
+      const payload = { id: user.id, isEmployer: user.isEmployer };
       jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "6d" }, (err, token) => {
         if (err) throw err;
         res.json({ token });
@@ -68,7 +70,9 @@ router.post(
   "/login",
   [
     body("email").isEmail().withMessage("Enter a valid email"),
-    body("password").exists().withMessage("Password is required"),
+    body("password")
+      .isLength({ min: 8 }).withMessage("Password must be at least 8 characters")
+      .matches(/\d/).withMessage("Password must contain at least one number"),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -90,7 +94,7 @@ router.post(
       }
 
       // Generate JWT Token
-      const payload = { user: { id: user.id } };
+      const payload = { id: user.id, isEmployer: user.isEmployer };
       jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "6d" }, (err, token) => {
         if (err) throw err;
         res.json({ token });
