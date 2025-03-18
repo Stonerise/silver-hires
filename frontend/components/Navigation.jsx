@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { fetchAPI } from "../utils/api";
 
 export default function Navigation() {
   const [userData, setUserData] = useState({
@@ -16,10 +17,8 @@ export default function Navigation() {
     // Check if user is logged in
     const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
     if (token) {
-      // Fetch user details
-      fetch("http://localhost:5001/api/auth/user-profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      // Fetch user details using fetchAPI utility
+      fetch("/api/auth/user-profile")
       .then((res) => {
         if (!res.ok) {
           // Instead of throwing an error, return a special object
@@ -28,7 +27,7 @@ export default function Navigation() {
         return res.json();
       })
       .then((data) => {
-        // Check if we got the error object
+        // Check if i get the error object
         if (data.status === "error") {
           console.log("Token invalid or expired, resetting user state");
           // Clear the invalid token

@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Navigation from "../../components/Navigation";
+import { fetchAPI } from "../../utils/api";
 
 export default function SignIn() {
   const router = useRouter();
@@ -12,6 +13,7 @@ export default function SignIn() {
   });
 
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,6 +22,7 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(""); // Clear previous messages
+    setIsLoading(true);
   
     try {
       const res = await fetch("/api/auth/login", {
@@ -59,6 +62,8 @@ export default function SignIn() {
     }
   } catch (error) {
     setMessage("Server error. Please try again later.");
+  } finally {
+    setIsLoading(false);
   }
 };
 

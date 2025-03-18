@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from "react";
 import Navigation from "../../components/Navigation";
+import { fetchAPI } from "../../utils/api";
 
 const countries = [
   "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia",

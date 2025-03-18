@@ -1,9 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Add this to ignore ESLint errors during build
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  // API proxying configuration
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: process.env.NEXT_PUBLIC_API_URL + '/api/:path*', 
+      },
+    ];
   },
 };
 
