@@ -6,6 +6,18 @@ const User = require("../models/User");
 const authenticateToken = require("../middleware/authMiddleware");
 
 const router = express.Router();
+const multer = require("multer");
+
+const uploadPhoto = require("./upload-photo");
+
+const upload = multer({ dest: "uploads/" });  // temporary destination, vercel should not persist
+
+router.post(
+  "/upload-photo", 
+  authenticateToken, 
+  upload.single("photo"),
+  uploadPhoto.handlePhotoUpload
+);
 
 // Register Route (Without Email Verification)
 router.post(
@@ -49,6 +61,7 @@ router.post(
     }
   }
 );
+
 
 // Login Route
 router.post(
