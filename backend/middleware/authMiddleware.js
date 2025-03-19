@@ -25,7 +25,7 @@ module.exports = function (req, res, next) {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET); // env variable
     console.log("Token Decoded:", decoded);
-    req.user = decoded.user; // matches { id, isEmployer } from login
+    req.user = decoded; // matches { id, isEmployer } from login
     if (!req.user.id) {
       console.error("No ID in decoded token:", decoded);
       return res.status(400).json({ msg: "Invalid token payload" });
