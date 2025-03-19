@@ -32,10 +32,13 @@ export default function SignIn() {
       });
   
       const data = await res.json();
+      console.log("Login Response:", res.status, data);
   
       if (res.ok) {
         setMessage("Login successful!");
         localStorage.setItem("token", data.token);
+        await new Promise(resolve => setTimeout(resolve, 0));  // ensure token is set
+        console.log("Token Stored:", localStorage.getItem("token"));
         
         // Get user details to determine redirect
       const userRes = await fetch("/api/auth/user-profile", {
@@ -49,13 +52,15 @@ export default function SignIn() {
         // Redirect based on user type
       if (userRes.ok) {
         if (userData.isEmployer) {
-          router.push("/employer");
+          console.log("Redirecting to /employer");
+          window.location.href = "/employer"; // Fallback
         } else {
-          router.push("/job-seeker");
+          console.log("Redirecting to /job-seeker");
+          window.location.href = "/job-seeker"; // Fallback
         }
       } else {
         console.error("User profile fetch failed:", userData);
-        router.push("/"); // Default redirect to home if can't determine user type
+        window.location.href = "/"; // Default redirect to home if can't determine user type
       }
     } else {
       setMessage(data.msg || "Invalid credentials.");

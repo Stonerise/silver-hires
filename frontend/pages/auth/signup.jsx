@@ -165,7 +165,7 @@ export default function SignUp() {
                 </div>
                 <div style={{ marginBottom: "20px" }}>
                   <label style={{ display: "block", marginBottom: "8px", fontWeight: "500", color: "#594e45", fontSize: "18px" }}>Password</label>
-                  <input type="password" name="password" placeholder="Password (min 6 characters)" onChange={handleChange} required style={{ width: "100%", padding: "12px 16px", border: "1px solid #eae7e0", borderRadius: "6px", fontSize: "18px", boxSizing: "border-box" }} />
+                  <input type="password" name="password" placeholder="Password (8 characters including 1 number)" onChange={handleChange} required style={{ width: "100%", padding: "12px 16px", border: "1px solid #eae7e0", borderRadius: "6px", fontSize: "18px", boxSizing: "border-box" }} />
                 </div>
                 <div style={{ marginBottom: "20px" }}>
                   <label style={{ display: "block", marginBottom: "8px", fontWeight: "500", color: "#594e45", fontSize: "18px" }}>Confirm Password</label>
