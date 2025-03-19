@@ -122,10 +122,13 @@ router.get("/employer-profile", authenticateToken, async (req, res) => {
 // this route to get user profile
 router.get("/user-profile", authenticateToken, async (req, res) => {
   try {
+    console.log("Fetching user profile for ID:", req.user.id);
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {
+      console.error("User not found for ID:", req.user.id);
       return res.status(404).json({ msg: "User not found" });
     }
+    console.log("User fetched successfully:", user);
     res.json(user);
   } catch (error) {
     console.error("Error fetching user profile:", error);
