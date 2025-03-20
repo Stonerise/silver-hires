@@ -2,6 +2,7 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const authMiddleware = require("../middleware/authMiddleware"); // Protect routes
 const Job = require("../models/Job");
+const authenticateToken = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -123,16 +124,16 @@ router.get("/employer-jobs", authMiddleware, async (req, res) => {
 });
 
 // Get a Single Job Post by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", authenticateToken, async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
     if (!job) {
-      return res.status(404).json({ msg: "Job not found" });
+      return res.status(404).json({ error: "Job not found" });
     }
     res.json(job);
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Server Error");
+    console.error("Error fetching job:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
@@ -188,5 +189,7 @@ router.post("/create", authMiddleware, async (req, res) => {
     res.status(500).json({ msg: "Server error", error: error.message });
   }
 });
+
+
 
 module.exports = router;

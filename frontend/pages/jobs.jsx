@@ -91,6 +91,7 @@ export default function Jobs() {
       if (response.ok) {
         alert("Application submitted successfully!");
         setShowPopup(false);
+        setFormData({ name: "", email: "", phone: "", resume: null, coverLetter: null }); // reset form
       } else {
         alert(result.message || "Failed to submit application.");
       }

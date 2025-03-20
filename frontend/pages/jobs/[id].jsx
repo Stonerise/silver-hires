@@ -5,7 +5,7 @@ import Navigation from "../../components/Navigation";
 
 export default function JobDetails() {
   const router = useRouter();
-  const { id } = router.query;
+  const { jobId } = router.query;
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
@@ -40,7 +40,7 @@ export default function JobDetails() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("http://localhost:5001/api/applications", {
+      const response = await fetch("/api/applications", {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formDataToSend,
@@ -50,6 +50,7 @@ export default function JobDetails() {
       if (response.ok) {
         alert("Application submitted successfully!");
         setShowPopup(false);
+        setFormData({ name: "", email: "", phone: "", resume: null, coverLetter: null });
       } else {
         alert(result.message || "Failed to submit application.");
       }
@@ -60,10 +61,14 @@ export default function JobDetails() {
   };
 
   useEffect(() => {
-    if (id) {
-      fetch(`http://localhost:5001/api/jobs/${id}`)
+    if (jobId) {
+      const token = localStorage.getItem("token");
+      fetch(`/api/jobs/${jobId}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      })
         .then((res) => res.json())
         .then((data) => {
+          if (data.error) throw new Error(data.error);
           setJob(data);
           setLoading(false);
         })
@@ -72,7 +77,7 @@ export default function JobDetails() {
           setLoading(false);
         });
     }
-  }, [id]);
+  }, [jobId]);
 
   if (loading) {
     return (
@@ -156,7 +161,9 @@ export default function JobDetails() {
           lineHeight: "1.6",
           boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
         }}>
-          <p>{job.description}</p>
+          <p><strong>Description:</strong> {job.description}</p>
+          <p><strong>Qualifications:</strong> {job.qualifications}</p>
+          <p><strong>Salary:</strong> {job.salary}</p>
         </div>
 
         <button style={{
@@ -209,7 +216,7 @@ export default function JobDetails() {
         fontWeight: "500",
         color: "#594e45"
       }}>
-        Apply for {job?.title}
+        Apply for {job.title}
       </h2>
       <form onSubmit={handleSubmit}>
         {/* Form inputs with updated styles */}
