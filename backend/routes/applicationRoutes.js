@@ -20,29 +20,31 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // POST: Submit job application
-router.post("/", authenticateToken, async (req, res) => {
-    console.log("Received Form Data:", req.body); // Debugging log
-  const { jobId, applicantName, applicantEmail, applicantPhone } = req.body;
+router.post("/", authenticateToken, upload.fields([{ name: "resume" }, { name: "coverLetter" }]),
+  async (req, res) => {
+    try {
+      const { applicantName, applicantEmail, applicantPhone, jobId } = req.body;
+      const { resume, coverLetter } = req.files;
 
-  if (!req.files || !req.files.resume || !req.files.coverLetter) {
-    return res.status(400).json({ message: "Resume and Cover Letter are required" });
-  }
+      if (!resume || !coverLetter) {
+        return res.status(400).json({ message: "Resume and Cover Letter are required" });
+      }
 
-  try {
     const application = new Application({
       jobId,
       applicantName,
       applicantEmail,
       applicantPhone,
-      resumeUrl: "TEMP_RESUME_URL",
-      coverLetterUrl: "TEMP_COVERLETTER_URL",
+      resumeUrl: `/uploads/${resume[0].filename}`,
+      coverLetterUrl: `/uploads/${coverLetter[0].filename}`,
       // following line to include user ID if authenticated
-      ...(req.user && { userId: req.user.id })
+      userId: req.user.id,
     });
 
     await application.save();
     res.status(201).json({ message: "Application submitted successfully" });
   } catch (error) {
+    console.error("Error submitting application:", error);
     res.status(500).json({ message: "Server Error", error });
   }
 });
