@@ -24,7 +24,8 @@ router.post("/", authenticateToken, upload.fields([{ name: "resume" }, { name: "
   async (req, res) => {
     try {
       const { applicantName, applicantEmail, applicantPhone, jobId } = req.body;
-      const { resume, coverLetter } = req.files;
+      const resume = req.files && req.files.resume ? req.files.resume[0] : null;
+      const coverLetter = req.files && req.files.coverLetter ? req.files.coverLetter[0] : null;
 
       if (!resume || !coverLetter) {
         return res.status(400).json({ message: "Resume and Cover Letter are required" });
